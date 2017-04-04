@@ -106,7 +106,8 @@
         if (!eventBlock) {
             console.log($slider.scrollLeft);
             $info.innerHTML = $slider.scrollLeft;
-            clearTimeout(timer);
+//            clearTimeout(timer);
+            timer = null;
             timer = setTimeout(function () {
                 console.log('stop scroll');
                 $info.innerHTML = 'stop scroll';
