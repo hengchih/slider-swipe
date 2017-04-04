@@ -17,7 +17,7 @@
             list-style: none;
         }
 
-        .slider-wrapper{
+        .slider-wrapper {
             height: 300px;
             width: 300px;
             overflow: hidden;
@@ -106,7 +106,10 @@
         if (!eventBlock) {
 //            console.log($slider.scrollLeft);
 //            $info.innerHTML = $slider.scrollLeft;
-            clearTimeout(timer);
+            if (timer) {
+                clearTimeout(timer);
+            }
+
             timer = setTimeout(function () {
 //                console.log('stop scroll');
 //                $info.innerHTML = 'stop scroll';
@@ -130,7 +133,7 @@
                 }, 10);
             }, 150);
         }
-    });
+    }, false);
 
 
 </script>
