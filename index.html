@@ -88,7 +88,9 @@
         </ul>
     </div>
 </div>
+<div class="info"></div>
 <script>
+    var $info = document.querySelector('.info');
     var $slider = document.querySelector('.slider');
     var $sliderLiList = document.querySelectorAll('.slider-li');
     var $sliderContainer = document.querySelector('.slider-container');
@@ -103,6 +105,7 @@
     $slider.addEventListener('scroll', function (e) {
         if (!eventBlock) {
             console.log($slider.scrollLeft);
+            $info.innerHTML = $slider.scrollLeft;
             clearTimeout(timer);
             timer = setTimeout(function () {
                 console.log('stop scroll');
@@ -117,6 +120,7 @@
                     currentAxis -= 1;
                 }
                 $slider.scrollLeft = axisList[currentAxis];
+                $info.innerHTML = $slider.scrollLeft;
                 setTimeout(function () {
                     eventBlock = false;
                 }, 100);
