@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .slider-wrapper{
+            height: 300px;
+            width: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .slider {
+            width: 300px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            margin: 0 auto;
+        }
+
+        .slider-container:before, .slider-container:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .slider-container {
+            padding-bottom: 20px;
+        }
+
+        .slider-li {
+            background-color: #EEE;
+            height: 300px;
+            width: 300px;
+            text-align: center;
+            /* Firefox, Chrome */
+            line-height: 300px;
+            /* IE */
+            *font-size: 270px; /* 200px * 0.9 = 180px */
+            *font-family: Arial;
+            padding: 0 1px;
+            box-sizing: border-box;
+        }
+
+        .slider-li {
+            content: ".";
+            font-size: 0;
+            -webkit-text-size-adjust: none;
+            float: left;
+        }
+
+        .slider-content {
+            vertical-align: middle;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="slider-wrapper">
+    <div class="slider">
+        <ul class="slider-container">
+            <li class="slider-li">
+                <iframe class="slider-content" src="https://www.youtube.com/embed/mjwmWPoHqW4" frameborder="0"></iframe>
+            </li>
+            <li class="slider-li">
+                <img class="slider-content" src="http://fakeimg.pl/350x350/BFAF86/000/">
+            </li>
+            <li class="slider-li">
+                <img class="slider-content" src="http://fakeimg.pl/350x200/ff0000/000/">
+            </li>
+            <li class="slider-li">
+                <img class="slider-content" src="http://fakeimg.pl/200x350/00ff00/000/">
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var $slider = document.querySelector('.slider');
+    var $sliderLiList = document.querySelectorAll('.slider-li');
+    var $sliderContainer = document.querySelector('.slider-container');
+    var sliderWidth = $slider.offsetWidth;
+    var currentAxis = 0;
+    var timer;
+    var eventBlock = false;
+    var axisList = [].slice.apply($sliderLiList).map(function (item, index) {
+        return index * sliderWidth;
+    });
+    $sliderContainer.style.width = (sliderWidth * $sliderLiList.length) + 'px';
+    $slider.addEventListener('scroll', function (e) {
+        if (!eventBlock) {
+            console.log($slider.scrollLeft);
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                console.log('stop scroll');
+                eventBlock = true;
+                if ($slider.scrollLeft > axisList[currentAxis]) {
+                    //往右看
+                    console.log('往右');
+                    currentAxis += 1;
+                } else {
+                    //往左看
+                    console.log('往左');
+                    currentAxis -= 1;
+                }
+                $slider.scrollLeft = axisList[currentAxis];
+                setTimeout(function () {
+                    eventBlock = false;
+                }, 100);
+            }, 150);
+        }
+    });
+
+
+</script>
+</body>
+</html>
