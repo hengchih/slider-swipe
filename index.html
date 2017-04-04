@@ -104,29 +104,28 @@
     $sliderContainer.style.width = (sliderWidth * $sliderLiList.length) + 'px';
     $slider.addEventListener('scroll', function (e) {
         if (!eventBlock) {
-            console.log($slider.scrollLeft);
-            $info.innerHTML = $slider.scrollLeft;
-//            clearTimeout(timer);
-            timer = null;
+//            console.log($slider.scrollLeft);
+//            $info.innerHTML = $slider.scrollLeft;
+            clearTimeout(timer);
             timer = setTimeout(function () {
-                console.log('stop scroll');
-                $info.innerHTML = 'stop scroll';
+//                console.log('stop scroll');
+//                $info.innerHTML = 'stop scroll';
                 eventBlock = true;
                 if ($slider.scrollLeft > axisList[currentAxis]) {
                     //往右看
-                    console.log('往右');
-                    $info.innerHTML = '往右';
+//                    console.log('往右');
+//                    $info.innerHTML = '往右';
                     currentAxis += 1;
                 } else {
                     //往左看
-                    console.log('往左');
-                    $info.innerHTML = '往左';
+//                    console.log('往左');
+//                    $info.innerHTML = '往左';
                     currentAxis -= 1;
                 }
                 $slider.scrollLeft = axisList[currentAxis];
-                $info.innerHTML = $slider.scrollLeft;
+//                $info.innerHTML = $slider.scrollLeft;
                 setTimeout(function () {
-                    $info.innerHTML = 'finish';
+//                    $info.innerHTML = 'finish';
                     eventBlock = false;
                 }, 10);
             }, 150);
